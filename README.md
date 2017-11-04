@@ -1,2 +1,0 @@
-# HackNC
-HackNC Application

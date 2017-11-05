@@ -17,8 +17,6 @@
     <% @charities.each do |charity| %>
       <tr>
         <td><%= charity.name %></td>
-        <td><%= charity.cust_id %></td>
-        <td><%= charity.acc_id %></td>
         <td><%= charity.balance %></td>
         <td><%= link_to 'Show', charity %></td>
         <td><%= link_to 'Edit', edit_charity_path(charity) %></td>

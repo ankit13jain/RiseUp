@@ -1,0 +1,2 @@
+module CharityOraganizationsHelper
+end

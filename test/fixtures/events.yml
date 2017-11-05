@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 
+  date: 2017-11-04 18:30:48
+  venue: 
+  fundsneeded: 1.5
+  fundsraised: 1.5
+
+two:
+  name: 
+  date: 2017-11-04 18:30:48
+  venue: 
+  fundsneeded: 1.5
+  fundsraised: 1.5

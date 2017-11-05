@@ -1,0 +1,47 @@
+<%= form_with(model: user_activity, local: true) do |form| %>
+  <% if user_activity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_activity.errors.count, "error") %> prohibited this user_activity from being saved:</h2>
+
+      <ul>
+      <% user_activity.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :activity_type %>
+    <%= form.text_field :activity_type, id: :user_activity_activity_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :activity_start_time %>
+    <%= form.datetime_select :activity_start_time, id: :user_activity_activity_start_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :activity_end_time %>
+    <%= form.datetime_select :activity_end_time, id: :user_activity_activity_end_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fundraised %>
+    <%= form.text_field :fundraised, id: :user_activity_fundraised %>
+  </div>
+
+  <div class="field">
+    <%= form.label :distance %>
+    <%= form.text_field :distance, id: :user_activity_distance %>
+  </div>
+
+  <div class="field">
+    <%= form.label :noofsteps %>
+    <%= form.text_field :noofsteps, id: :user_activity_noofsteps %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

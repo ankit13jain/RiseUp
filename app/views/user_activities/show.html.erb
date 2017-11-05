@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Activity type:</strong>
+  <%= @user_activity.activity_type %>
+</p>
+
+<p>
+  <strong>Activity start time:</strong>
+  <%= @user_activity.activity_start_time %>
+</p>
+
+<p>
+  <strong>Activity end time:</strong>
+  <%= @user_activity.activity_end_time %>
+</p>
+
+<p>
+  <strong>Fundraised:</strong>
+  <%= @user_activity.fundraised %>
+</p>
+
+<p>
+  <strong>Distance:</strong>
+  <%= @user_activity.distance %>
+</p>
+
+<p>
+  <strong>Noofsteps:</strong>
+  <%= @user_activity.noofsteps %>
+</p>
+
+<%= link_to 'Edit', edit_user_activity_path(@user_activity) %> |
+<%= link_to 'Back', user_activities_path %>

@@ -10,13 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171104194847) do
+ActiveRecord::Schema.define(version: 20171105042201) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
     t.float "distance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "charities", force: :cascade do |t|
+    t.string "name"
+    t.string "cust_id"
+    t.string "acc_id"
+    t.float "balance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.text "desc"
+    t.integer "points_needed"
+    t.string "event_img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_activity_histories", force: :cascade do |t|
+    t.integer "points_earned"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "event_id"
+    t.index ["event_id"], name: "index_user_activity_histories_on_event_id"
+    t.index ["user_id"], name: "index_user_activity_histories_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -34,6 +62,7 @@ ActiveRecord::Schema.define(version: 20171104194847) do
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
     t.boolean "superadmin", default: false
+    t.integer "total_points"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

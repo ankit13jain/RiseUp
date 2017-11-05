@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tasks
   resources :events
   resources :charities
   resources :user_activity_histories
@@ -11,6 +12,5 @@ Rails.application.routes.draw do
     post '/users/savenew', to: 'users#savenew'
     resources :users
   end
-  resources :activities
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

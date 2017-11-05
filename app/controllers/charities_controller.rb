@@ -1,3 +1,7 @@
+require 'net/http'
+require 'uri'
+require 'json'
+
 class CharitiesController < ApplicationController
   before_action :set_charity, only: [:show, :edit, :update, :destroy]
 
@@ -25,7 +29,50 @@ class CharitiesController < ApplicationController
   # POST /charities.json
   def create
     @charity = Charity.new(charity_params)
+    uri = URI.parse("http://api.reimaginebanking.com/customers?key=ec40a3477234fc9418ca405ec3daa910")
 
+    header = {"Content-Type"=> "application/json;charset=UTF-8"}
+    customer = {
+        "first_name": @charity.name,
+        "last_name": "Trust",
+        "address": {
+            "street_number": "2820",
+            "street_name": "Avent ferry Road",
+            "city": "Raleigh",
+            "state": "NC",
+            "zip": "27606"
+        }
+    }
+
+    # Create the HTTP objects
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(uri.request_uri, header)
+    request.body = customer.to_json
+
+    # Send the request
+    response = http.request(request)
+    parsed_resp = JSON.parse(response.body)
+    @charity.cust_id = parsed_resp["objectCreated"]["_id"]
+    uri = URI.parse("http://api.reimaginebanking.com/customers/#{@charity.cust_id}/accounts?key=ec40a3477234fc9418ca405ec3daa910")
+
+    header = {"Content-Type"=> "application/json;charset=UTF-8"}
+    account = {
+        "type": "Credit Card",
+        "nickname": "CharityAccount",
+        "rewards": 0,
+        "balance": 0
+    }
+
+    # Create the HTTP objects
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(uri.request_uri, header)
+    request.body = account.to_json
+
+    # Send the request
+    response = http.request(request)
+    parsed_resp = JSON.parse(response.body)
+    @charity.acc_id = parsed_resp["objectCreated"]["_id"]
+    @charity.balance = parsed_resp["objectCreated"]["balance"]
     respond_to do |format|
       if @charity.save
         format.html { redirect_to @charity, notice: 'Charity was successfully created.' }

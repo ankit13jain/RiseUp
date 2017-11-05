@@ -1,15 +1,16 @@
 
 	<div class="container">
 		<% if user_signed_in? %>
-      <%= link_to("Tasks","/tasks")%>
-        <%= link_to("Charity","/charities")%>
+      <%= link_to("Tasks","/tasks")%><br>
+      <%= link_to("Charity","/charities")%><br>
+      <%= link_to("Events","/events")%><br>
+      <%= link_to("Donations", "/donations") %>
 			<% if is_admin_or_superadmin %>
 				<h3>Admin/SuperAdmin : Links</h3>
 				<br><%= link_to("Create new member", "/admin/users/new") %><br>
 				<br><%= link_to("See all Members", "/admin/users") %><br>			
 			<% else %>
-				<h3>Customer : Links</h3>
-			<% end %>
+h			<% end %>
 			<%= link_to "Profile", edit_user_registration_path %>
 			
 			<%= link_to('Sign Out', destroy_user_session_path, method: :delete) %> 

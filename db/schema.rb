@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171105042201) do
+ActiveRecord::Schema.define(version: 20171105073417) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -28,11 +28,28 @@ ActiveRecord::Schema.define(version: 20171105042201) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "donations", force: :cascade do |t|
+    t.integer "donation_amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "event_id"
+    t.index ["event_id"], name: "index_donations_on_event_id"
+    t.index ["user_id"], name: "index_donations_on_user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.text "desc"
     t.integer "points_needed"
     t.string "event_img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "name"
+    t.integer "points_per_mile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -43,7 +60,9 @@ ActiveRecord::Schema.define(version: 20171105042201) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "event_id"
+    t.integer "task_id"
     t.index ["event_id"], name: "index_user_activity_histories_on_event_id"
+    t.index ["task_id"], name: "index_user_activity_histories_on_task_id"
     t.index ["user_id"], name: "index_user_activity_histories_on_user_id"
   end
 

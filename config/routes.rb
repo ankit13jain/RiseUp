@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :events
   resources :charities
   resources :user_activity_histories
-  root 'application#index'
+  root 'events#index'
  	devise_for :users, controllers: {
       sessions: 'users/sessions'
   }

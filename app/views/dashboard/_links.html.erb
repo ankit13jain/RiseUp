@@ -1,6 +1,7 @@
 
 	<div class="container">
 		<% if user_signed_in? %>
+      <%= link_to("Activities","activities")%>
 			<% if is_admin_or_superadmin %>
 				<h3>Admin/SuperAdmin : Links</h3>
 				<br><%= link_to("Create new member", "/admin/users/new") %><br>
